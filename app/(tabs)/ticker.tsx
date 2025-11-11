@@ -1,6 +1,6 @@
-import { View, Text, TextProps, Button } from "react-native";
 import { MotiView } from "moti";
 import { useState } from "react";
+import { Pressable, Text, TextProps, View } from "react-native";
 const numbersToFun = [...Array(10).keys()];
 
 type tickerListProps = {
@@ -21,9 +21,8 @@ const TickerList = ({ number, fontSize }: tickerListProps) => {
     <View
       style={{
         height: 50,
-       
 
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <MotiView
@@ -51,18 +50,13 @@ const TickerList = ({ number, fontSize }: tickerListProps) => {
   );
 };
 
-export default function Ticker({
-  fontSize = 50,
-}: {
-  fontSize?: number;
-}) {
-
+export default function Ticker({ fontSize = 50 }: { fontSize?: number }) {
   const [value, setValue] = useState(0);
   const splitValue = value.toString().split("");
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <View style={{ flexDirection: "row", gap: 10 }}>
+      <View style={{ flexDirection: "row", gap: 10, marginBottom: 20 }}>
         {splitValue.map((number, index) => (
           <TickerList
             number={parseInt(number)}
@@ -71,7 +65,27 @@ export default function Ticker({
           />
         ))}
       </View>
-      <Button title="Random" onPress={() => setValue(Math.floor(Math.random() * 1000000))} />
+
+      <Pressable
+        style={{
+          paddingHorizontal: 24,
+          paddingVertical: 14,
+          borderRadius: 999,
+          backgroundColor: "#1e40af",
+        }}
+        onPress={() => setValue(Math.floor(Math.random() * 1000000))}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontWeight: "600",
+            fontSize: 18,
+            textAlign: "center",
+          }}
+        >
+          Random
+        </Text>
+      </Pressable>
     </View>
   );
 }
